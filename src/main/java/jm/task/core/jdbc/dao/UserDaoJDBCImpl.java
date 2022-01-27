@@ -10,10 +10,6 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
     private final Connection connection = Util.getConnection();
 
-    public UserDaoJDBCImpl() {
-
-    }
-
     public void createUsersTable() {
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS test.users" +
