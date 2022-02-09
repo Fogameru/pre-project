@@ -1,25 +1,24 @@
-package web.controller;
+package com.naito.springboot311.controller;
 
+import com.naito.springboot311.model.User;
+import com.naito.springboot311.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.model.User;
-import web.service.UserService;
+
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @RequestMapping("/")
     public String showAllUser(Model model) {
-        model.addAttribute("allUser", userService.getAllUser());
+        model.addAttribute("allUser", userService.findAll());
         return "user";
     }
 
@@ -33,26 +32,26 @@ public class UserController {
 
     @RequestMapping("saveUser")
     public String saveUser(User user) {
-        userService.addUser(user);
+        userService.save(user);
         return "redirect:/";
     }
 
     @RequestMapping("editUser/{id}")
-    public String editUser(@PathVariable(value = "id") int id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
+    public String editUser(@PathVariable(value = "id") Long id, Model model) {
+        model.addAttribute("user", userService.getById(id));
         model.addAttribute("save", false);
         return "editUser";
     }
 
     @PostMapping("editUser/updateUser")
     public String updateUser(User user) {
-        userService.updateUser(user);
+        userService.save(user);
         return "redirect:/";
     }
 
     @RequestMapping("deleteUser")
-    public String edit(@RequestParam("id") int id) {
-        userService.deleteUser(id);
+    public String edit(@RequestParam("id") Long id) {
+        userService.deleteById(id);
         return "redirect:/";
     }
 
