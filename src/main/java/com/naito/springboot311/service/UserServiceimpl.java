@@ -23,8 +23,9 @@ public class UserServiceimpl implements UserService {
 
     @Override
     @Transactional
-    public void save(User user) {
+    public Object save(User user) {
         userRepository.save(user);
+        return null;
     }
 
     @Override
@@ -37,6 +38,12 @@ public class UserServiceimpl implements UserService {
     @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
 

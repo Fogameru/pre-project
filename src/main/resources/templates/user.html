@@ -1,52 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All User</title>
+    <title>Info User Page</title>
 </head>
 <body>
-<h2>All User</h2>
-<table class="center">
-    <tr>
-        <th>Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Edit</th>
-    </tr>
 
-    <tbody>
-    <tr th:each="user : ${allUser}">
-        <td th:text="${user.getName()}"></td>
-        <td th:text="${user.getLastName()}"></td>
-        <td th:text="${user.getAge()}"></td>
-        <td>
-            <form class="center" th:action="@{editUser/{id}(id=${user.getId()})}">
-                <button type="submit">Edit</button>
-            </form>
-        </td>
-        <td>
-            <form class="center" th:action="@{deleteUser}">
-                <input name="id" th:value="${user.id}" type="hidden">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
 
-    </tr>
-    </tbody>
-</table>
-<form class="center" th:action="@{addUser}">
-    <button type="submit">Add</button>
+<div class="position">
+    <h3>User page</h3>
+    <br>
+    <p><b>ID, </b><span th:text="*{infoUser.id}"/></p>
+    <p><b>User Name, </b><span th:text="*{infoUser.name}"/></p>
+    <p><b>Your Last Name, </b><span th:text="*{infoUser.lastName}"/></p>
+    <p><b>Your Login, </b><span th:text="*{infoUser.login}"/></p>
+    <p><b>Your Password, </b><span th:text="*{infoUser.password}"/></p>
+    <p><b>Your Role, </b><span th:text="*{infoUser.roles}"/></p>
+</div>
+
+
+<form class="position" method="post" th:action="@{/logout}">
+    <input type="submit" value="Sign Out"/>
 </form>
+<br>
 
+</body>
 <style>
-    .center {
+    .position {
         position: relative;
         margin-left: 10%;
     }
 
     h2 {
         position: relative;
-        margin-left: 12%;
+        margin-left: 10%;
         padding-top: 10px;
     }
 

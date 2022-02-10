@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2 th:text="${save} ? 'Add User' : 'Edit User'"></h2>
-<form class="center" method="post" th:action="${save} ? @{/saveUser} : @{/editUser/updateUser}" th:object="${user}">
+<form class="position" method="post" th:action="${save} ? @{/saver} : @{/edits/updates}" th:object="${user}">
     <input th:field="*{id}" type="hidden"/>
     <div>
         <label>Name:</label>
@@ -23,11 +23,30 @@
         <input placeholder="Enter your Age" th:field="*{age}" type="text"/>
     </div>
     <br>
+    <div>
+        <label>Login:</label>
+        <input placeholder="Enter your Age" th:field="*{login}" type="text"/>
+    </div>
+    <br>
+    <div>
+        <label>Password:</label>
+        <input placeholder="Enter your Age" th:field="*{password}" type="text"/>
+    </div>
+    <br>
+    <div>
+        <input name="roles" th:each="role : ${roles_list}"
+               th:field="*{roles}"
+               th:text="${role}"
+               th:value="${role}"
+               type="checkbox"
+        />
+    </div>
+    <br>
     <input type="submit" value="Submit"/>
 </form>
 
 <style>
-    .center {
+    .position {
         position: relative;
         margin-left: 10%;
     }
