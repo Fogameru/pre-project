@@ -6,12 +6,11 @@ import com.naito.springboot311.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Objects;
 
 
 @Controller
@@ -20,53 +19,41 @@ public class UserController {
     private final UserService userService;
 
     @RequestMapping("/")
-    public String index() {
-        return "redirect:/login";
+    public String home(Model model, Principal principal) {
+        if (Objects.nonNull(principal)) {
+            model.addAttribute("infoUser", userService.findByUsername(principal.getName()));
+        }
+        return "home";
     }
 
     @RequestMapping("/user")
     public String user(Model model, Principal principal) {
-        model.addAttribute("infoUser", userService.findByLogin(principal.getName()));
+        model.addAttribute("infoUser", userService.findByUsername(principal.getName()));
         return "user";
     }
 
     @RequestMapping("/admin")
-    public String showAllUser(Model model) {
+    public String showAllUser(Model model, Principal principal) {
         model.addAttribute("allUser", userService.findAll());
+        model.addAttribute("roles_list", Roles.values());
+        model.addAttribute("infoUser", userService.findByUsername(principal.getName()));
         return "admin";
     }
 
-    @RequestMapping("/adduser")
-    public String addNewUser(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("roles_list", Roles.values());
-        model.addAttribute("save", true);
-        return "editUser";
-    }
-
-    @RequestMapping("/saver")
-    public String saveUser(User user) {
+    @RequestMapping("/admin/add")
+    public String add(User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
-    @RequestMapping("/edits/{id}")
-    public String editUser(@PathVariable(value = "id") Long id, Model model) {
-        model.addAttribute("user", userService.getById(id));
-        model.addAttribute("roles_list", Roles.values());
-        model.addAttribute("save", false);
-        return "editUser";
-    }
-
-    @PostMapping("/edits/updates")
-    public String updateUser(User user) {
+    @RequestMapping("/admin/edit")
+    public String edit(User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
-    @RequestMapping("/deletes")
-    public String edit(@RequestParam Long id) {
+    @RequestMapping("/admin/delete/{}")
+    public String delete(@RequestParam Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }

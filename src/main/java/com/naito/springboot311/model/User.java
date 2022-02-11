@@ -25,11 +25,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private int age;
     @Column(unique = true, nullable = false)
-    private String login;
+    private String username;
     @Column(nullable = false)
     private String password;
 
@@ -54,7 +54,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override

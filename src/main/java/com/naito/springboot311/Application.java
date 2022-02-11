@@ -23,30 +23,30 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (Objects.isNull(userService.findByLogin("TestUser"))
-                && Objects.isNull(userService.findByLogin("TestAdmin"))
-                && Objects.isNull(userService.findByLogin("TestAdminAdnUser"))) {
+        if (Objects.isNull(userService.findByUsername("TestUser"))
+                && Objects.isNull(userService.findByUsername("TestAdmin"))
+                && Objects.isNull(userService.findByUsername("TestAdminAdnUser"))) {
             userService.save(User.builder()
-                    .name("TestUser")
-                    .lastName("TestLastName")
+                    .firstname("TestUser")
+                    .lastname("TestLastName")
                     .age(957)
-                    .login("TestUser")
+                    .username("TestUser")
                     .password("123")
                     .roles(Set.of(new Role("USER")))
                     .build());
             userService.save(User.builder()
-                    .name("TestAdmin")
-                    .lastName("TestLastNameAdmin")
+                    .firstname("TestAdmin")
+                    .lastname("TestLastNameAdmin")
                     .age(957)
-                    .login("TestAdmin")
+                    .username("TestAdmin")
                     .password("123")
                     .roles(Set.of(new Role("ADMIN")))
                     .build());
             userService.save(User.builder()
-                    .name("TestAdminAdnUser")
-                    .lastName("TestLastNameAdminAndser")
+                    .firstname("TestAdminAdnUser")
+                    .lastname("TestLastNameAdminAndUser")
                     .age(957)
-                    .login("TestAdminAdnUser")
+                    .username("TestAdminAdnUser")
                     .password("123")
                     .roles(Set.of(new Role("ADMIN"), new Role("USER")))
                     .build());

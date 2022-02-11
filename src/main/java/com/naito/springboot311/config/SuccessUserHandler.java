@@ -21,7 +21,7 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
             switch (authority.getAuthority()) {
                 case "ADMIN" -> httpServletResponse.sendRedirect("/admin");
                 case "USER" -> httpServletResponse.sendRedirect("/user");
-                default -> httpServletResponse.sendRedirect("/");
+                default -> httpServletResponse.sendRedirect("/home");
             }
             break;
         }
