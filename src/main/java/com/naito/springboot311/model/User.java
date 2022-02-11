@@ -1,9 +1,7 @@
 package com.naito.springboot311.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +16,9 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -36,7 +37,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "roles", joinColumns = {@JoinColumn(name = "roles")})
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Role> roles;
-
 
     @Override
     public boolean equals(Object o) {
