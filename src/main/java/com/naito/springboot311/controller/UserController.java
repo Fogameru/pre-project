@@ -12,7 +12,7 @@ public class UserController {
     private final UserService userService;
 
     @RequestMapping("/")
-    public String home() {
+    public String login() {
         return "redirect:/login";
     }
 
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @RequestMapping("/admin")
-    public String showAllUser() {
+    public String admin() {
         return "admin";
     }
 
