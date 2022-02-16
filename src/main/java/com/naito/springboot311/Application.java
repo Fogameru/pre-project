@@ -23,31 +23,31 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (Objects.isNull(userService.findByUsername("TestUser"))
-                && Objects.isNull(userService.findByUsername("TestAdmin"))
-                && Objects.isNull(userService.findByUsername("TestAdminAdnUser"))) {
+        if (Objects.isNull(userService.findByUsername("Dereck"))
+                && Objects.isNull(userService.findByUsername("Anna"))
+                && Objects.isNull(userService.findByUsername("Kratos"))) {
             userService.save(User.builder()
-                    .firstname("TestUser")
-                    .lastname("TestLastName")
-                    .age(957)
-                    .username("TestUser")
-                    .password("123")
+                    .firstname("Dereck")
+                    .lastname("Storm")
+                    .age(35)
+                    .username("Dereck")
+                    .password("Dereck")
                     .roles(Set.of(new Role("USER")))
                     .build());
             userService.save(User.builder()
-                    .firstname("TestAdmin")
-                    .lastname("TestLastNameAdmin")
-                    .age(957)
-                    .username("TestAdmin")
-                    .password("123")
+                    .firstname("Anna")
+                    .lastname("Portman")
+                    .age(20)
+                    .username("Anna")
+                    .password("Anna")
                     .roles(Set.of(new Role("ADMIN")))
                     .build());
             userService.save(User.builder()
-                    .firstname("TestAdminAdnUser")
-                    .lastname("TestLastNameAdminAndUser")
-                    .age(957)
-                    .username("TestAdminAdnUser")
-                    .password("123")
+                    .firstname("Kratos")
+                    .lastname("God Of War")
+                    .age(487987)
+                    .username("Kratos")
+                    .password("Kratos")
                     .roles(Set.of(new Role("ADMIN"), new Role("USER")))
                     .build());
         }
