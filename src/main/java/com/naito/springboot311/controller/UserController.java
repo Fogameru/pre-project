@@ -25,23 +25,5 @@ public class UserController {
     public String showAllUser() {
         return "admin";
     }
-//
-//    @RequestMapping("/admin/add")
-//    public String add(User user, Model model) {
-//        userService.save(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @RequestMapping("/admin/edit")
-//    public String edit(User user) {
-//        userService.save(user);
-//        return "redirect:/admin";
-//    }
-//
-//    @RequestMapping("/admin/delete/{}")
-//    public String delete(@RequestParam Long id) {
-//        userService.deleteById(id);
-//        return "redirect:/admin";
-//    }
 
 }
